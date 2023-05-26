@@ -4,7 +4,9 @@
     <div class="form-input">
       <input :id="'start' + per" value="" placeholder="00:00" maxlength="5" />
       <input :id="'end' + per" value="" placeholder="00:00" />
-      <button @click="diff">Рассчитать</button>
+      <button @click="diff" :class="{ 'is-blue': isChanged }">
+        {{ isChanged ? "Рассчитано" : "Рассчитать" }}
+      </button>
     </div>
     <div class="del">
       <button @click="$emit('deleting', per)">Удалить</button>
@@ -19,6 +21,7 @@ export default {
   data() {
     return {
       value: null,
+      isChanged: false,
     };
   },
   methods: {
@@ -43,6 +46,8 @@ export default {
         ":" +
         (minutes < 9 ? "0" : "") +
         minutes;
+
+      if (!this.isChanged) this.isChanged = true;
 
       let totalArray = answer.split(":");
       this.$emit("calculated", {
@@ -161,5 +166,8 @@ export default {
 .del button:active {
   background-color: #cb2027;
   box-shadow: none;
+}
+.form-input .is-blue {
+  background: #362fd9 !important;
 }
 </style>

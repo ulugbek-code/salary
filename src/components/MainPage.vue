@@ -124,7 +124,7 @@ export default {
     getTime(val) {
       if (!this.salary) {
         this.notSalary = true;
-        console.log(this.notSalary);
+        // console.log(this.notSalary);
         return;
       }
       this.notSalary = false;
